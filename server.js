@@ -68,7 +68,7 @@ app.post("/api/phonepe-initiate", async (req, res) => {
 // Import other routes
 const adminRoutes = require("./src/routes/adminRoutes");
 const bookingRoutes = require("./src/routes/bookingRoutes");
-const customerBookingRoutes = require("./src/routes/CustomerBookingRoutes");
+const customerBookingRoutes = require("./src/routes/customerBookingRoutes");
 
 // Use routes
 app.use("/api/admin", adminRoutes);
