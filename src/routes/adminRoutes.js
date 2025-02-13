@@ -21,25 +21,28 @@ router.post("/register", async (req, res) => {
 });
 
 // Admin login
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const admin = await Admin.findOne({ email });
-    if (!admin) {
-      return res.status(401).json({ message: "Invalid credentials" });
+
+    // Dummy credentials for testing
+    const dummyEmail = 'admin@example.com';
+    const dummyPassword = '123456';
+
+    if (email !== dummyEmail || password !== dummyPassword) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
-    const isMatch = await admin.matchPassword(password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
-    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "1d",
+
+    const token = jwt.sign({ id: 'dummy-admin-id' }, process.env.JWT_SECRET_KEY, {
+      expiresIn: '1d',
     });
-    res.json({ message: "Login successful", token });
+
+    res.json({ message: 'Login successful', token, adminId: 'dummy-admin-id' });
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
+
 
 // Protected route: Get admin profile
 router.get("/profile", adminAuth, async (req, res) => {
