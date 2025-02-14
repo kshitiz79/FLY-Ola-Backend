@@ -13,7 +13,6 @@ require("./config/db")(); // Connect DB
 const app = express();
 
 // Middleware
-const app = express();
 
 // Middleware
 app.use(helmet());
